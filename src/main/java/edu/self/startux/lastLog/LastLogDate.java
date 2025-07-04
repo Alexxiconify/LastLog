@@ -134,12 +134,12 @@ public class LastLogDate extends Date {
         cal.setTime(this);
         Locale locale = Locale.US;
         return String.format("%3s %3s %02d %04d %02d:%02d:%02d",
-                             cal.getDisplayName(cal.DAY_OF_WEEK, cal.SHORT, locale),
-                             cal.getDisplayName(cal.MONTH, cal.SHORT, locale),
-                             cal.get(cal.DAY_OF_MONTH),
-                             cal.get(cal.YEAR),
-                             cal.get(cal.HOUR_OF_DAY),
-                             cal.get(cal.MINUTE),
-                             cal.get(cal.SECOND));
+                             cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, locale),
+                             cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, locale),
+                             cal.get(Calendar.DAY_OF_MONTH),
+                             cal.get(Calendar.YEAR),
+                             cal.get(Calendar.HOUR_OF_DAY),
+                             cal.get(Calendar.MINUTE),
+                             cal.get(Calendar.SECOND));
     }
 }
