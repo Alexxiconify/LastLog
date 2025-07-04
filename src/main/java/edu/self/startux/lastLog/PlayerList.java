@@ -27,6 +27,8 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 final class PlayerList implements Iterable<PlayerList.Entry> {
     private static final int PAGE_LENGTH = 10; // how many lines per page?
@@ -185,27 +187,25 @@ final class PlayerList implements Iterable<PlayerList.Entry> {
         int length = maxIndex - minIndex + 1;
         if (length == 0) {
             if (options.after != null) {
-                sender.sendMessage(LastLogColors.MINOR + "After " + options.after);
+                sender.sendMessage(Component.text("After " + options.after, LastLogColors.MINOR));
             }
             if (options.before != null) {
-                sender.sendMessage(LastLogColors.MINOR + "Before " + options.before);
+                sender.sendMessage(Component.text("Before " + options.before, LastLogColors.MINOR));
             }
-            sender.sendMessage(LastLogColors.ERROR + "[LastLog] Empty list!");
+            sender.sendMessage(Component.text("[LastLog] Empty list!", LastLogColors.ERROR));
             return;
         }
         int pageCount = ((length - 1) / PAGE_LENGTH) + 1;
         if (options.pageNumber >= pageCount) {
-            sender.sendMessage(LastLogColors.ERROR + "[LastLog] Page " + (options.pageNumber + 1)
-                               + " selected, but only " + pageCount + " available!");
+            sender.sendMessage(Component.text("[LastLog] Page " + (options.pageNumber + 1) + " selected, but only " + pageCount + " available!", LastLogColors.ERROR));
             return;
         }
-        sender.sendMessage(LastLogColors.HEADER + (lastlog ? "Last login" : "First login") + " - " + length
-                           + " Players - Page [" + (options.pageNumber + 1) + "/" + pageCount + "]");
+        sender.sendMessage(Component.text((lastlog ? "Last login" : "First login") + " - " + length + " Players - Page [" + (options.pageNumber + 1) + "/" + pageCount + "]", LastLogColors.HEADER));
         if (options.after != null) {
-            sender.sendMessage(LastLogColors.MINOR + "After " + options.after);
+            sender.sendMessage(Component.text("After " + options.after, LastLogColors.MINOR));
         }
         if (options.before != null) {
-            sender.sendMessage(LastLogColors.MINOR + "Before " + options.before);
+            sender.sendMessage(Component.text("Before " + options.before, LastLogColors.MINOR));
         }
         for (int i = 0; i < PAGE_LENGTH; ++i) {
             int index = minIndex + options.pageNumber * PAGE_LENGTH + i;
@@ -213,9 +213,11 @@ final class PlayerList implements Iterable<PlayerList.Entry> {
                 break;
             }
             Entry entry = getEntry(index);
-            String nameColor = Bukkit.getServer().getOfflinePlayer(entry.uuid).isOnline() ? LastLogColors.ONLINE
-                : LastLogColors.RESET;
-            sender.sendMessage(LastLogColors.DATE + new LastLogDate(entry.time) + " " + nameColor + entry.name);
+            NamedTextColor nameColor = Bukkit.getServer().getOfflinePlayer(entry.uuid).isOnline() ? LastLogColors.ONLINE : LastLogColors.RESET;
+            sender.sendMessage(Component.text()
+                .append(Component.text(new LastLogDate(entry.time).toString() + " ", LastLogColors.DATE))
+                .append(Component.text(entry.name, nameColor))
+                .build());
         }
     }
 }

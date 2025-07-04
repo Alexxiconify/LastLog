@@ -24,6 +24,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import net.kyori.adventure.text.Component;
 
 final class LogInfoExecutor implements CommandExecutor {
     private LastLogPlugin plugin;
@@ -70,9 +71,11 @@ final class LogInfoExecutor implements CommandExecutor {
             }
             OfflinePlayer player = findByName(arg);
             if (player == null) {
-                sender.sendMessage("Player "
-                                   + LastLogColors.UNKNOWN + arg + LastLogColors.RESET
-                                   + " is unknown");
+                sender.sendMessage(Component.text()
+                    .append(Component.text("Player "))
+                    .append(Component.text(arg, LastLogColors.UNKNOWN))
+                    .append(Component.text(" is unknown", LastLogColors.RESET))
+                    .build());
             } else {
                 UUID uuid = player.getUniqueId();
                 String name = player.getName();
@@ -92,15 +95,19 @@ final class LogInfoExecutor implements CommandExecutor {
                         last = entry.time;
                     }
                 }
-                sender.sendMessage("Player " + LastLogColors.PLAYER_NAME + name + " " + (player.isOnline() ? LastLogColors.ONLINE + "Online" : LastLogColors.OFFLINE + "Offline"));
-                sender.sendMessage(LastLogColors.DATE
-                                   + new LastLogDate(first)
-                                   + LastLogColors.RESET
-                                   + " First Login");
-                sender.sendMessage(LastLogColors.DATE
-                                   + new LastLogDate(last)
-                                   + LastLogColors.RESET
-                                   + " Last Login");
+                sender.sendMessage(Component.text()
+                    .append(Component.text("Player "))
+                    .append(Component.text(name, LastLogColors.PLAYER_NAME))
+                    .append(Component.text(player.isOnline() ? " Online" : " Offline", player.isOnline() ? LastLogColors.ONLINE : LastLogColors.OFFLINE))
+                    .build());
+                sender.sendMessage(Component.text()
+                    .append(Component.text(new LastLogDate(first).toString(), LastLogColors.DATE))
+                    .append(Component.text(" First Login", LastLogColors.RESET))
+                    .build());
+                sender.sendMessage(Component.text()
+                    .append(Component.text(new LastLogDate(last).toString(), LastLogColors.DATE))
+                    .append(Component.text(" Last Login", LastLogColors.RESET))
+                    .build());
             }
         }
         return true;
