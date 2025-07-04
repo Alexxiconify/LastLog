@@ -89,7 +89,7 @@ public final class LastLogPlugin extends JavaPlugin implements Listener {
         UUID uuid = player.getUniqueId();
         long last = System.currentTimeMillis();
         lastlogList.set(uuid, name, last);
-        if (!player.hasPlayedBefore()) {
+        if (player.getFirstPlayed() <= 0) {
             long first = last;
             firstlogList.set(uuid, name, first);
             String message = LastLogColors.UNKNOWN + name + LastLogColors.HEADER + " has logged in for the first time";
