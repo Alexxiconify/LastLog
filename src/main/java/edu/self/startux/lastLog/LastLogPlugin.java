@@ -93,7 +93,6 @@ public final class LastLogPlugin extends JavaPlugin implements Listener {
             long first = last;
             firstlogList.set(uuid, name, first);
             String message = LastLogColors.UNKNOWN + name + LastLogColors.HEADER + " has logged in for the first time";
-            // getServer().broadcast(message, NOTIFY_PERMISSION); // this acts weird
             getServer().getConsoleSender().sendMessage(message);
             for (Player rec : getServer().getOnlinePlayers()) {
                 if (rec.hasPermission(NOTIFY_PERMISSION)) {

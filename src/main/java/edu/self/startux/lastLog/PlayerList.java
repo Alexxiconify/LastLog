@@ -91,11 +91,16 @@ final class PlayerList implements Iterable<PlayerList.Entry> {
         this.playerList = new ArrayList<Entry>();
 
         for (OfflinePlayer player : playerList) {
-            long time = (lastlog ? player.getLastPlayed() : player.getFirstPlayed());
+            long time;
+            if (lastlog) {
+                time = player.getLastPlayed();
+            } else {
+                time = player.getFirstPlayed();
+            }
 
             // Not sure why, but sometimes a player has a name = null
             // To avoid NullPointerExceptions, we'll skip this entry
-            if (player.getUniqueId() != null && player.getName() != null) {
+            if (player.getUniqueId() != null && player.getName() != null && time > 0) {
                 this.playerList.add(new Entry(player.getUniqueId(), player.getName(), time));
             }
         }
