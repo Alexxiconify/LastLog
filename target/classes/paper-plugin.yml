@@ -4,18 +4,6 @@ api-version: 1.21
 description: Show listing of last logged in players
 main: edu.self.startux.lastLog.LastLogPlugin
 author: StarTux
-commands:
-  lastlog:
-    description: show listing of the last logged in players
-    permission: lastlog.lastlog
-    usage: "Usage: /lastlog [options] [pagenumber]"
-  firstlog:
-    description: show listing of the last players who logged in for the first time
-    permission: lastlog.firstlog
-    usage: "Usage: /firstlog [options] [pagenumber]"
-  loginfo:
-    description: show first and last login date of a user
-    usage: "Usage: /loginfo <playername>"
 permissions:
   lastlog.*:
     description: "get all permission nodes"

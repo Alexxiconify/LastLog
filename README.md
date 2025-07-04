@@ -36,29 +36,11 @@ Except for permissions, none.
 
 ## Building the Plugin
 
-This project uses Maven for building. IntelliJ IDEA has excellent built-in Maven support.
-
-### Using IntelliJ IDEA
-1. Open the project in IntelliJ IDEA
-2. IDEA will automatically detect the `pom.xml` and import it as a Maven project
-3. Use the Maven tool window to run build goals
-
-### Using Command Line
-```bash
-# Clean and compile
-mvn clean compile
-
-# Package the plugin
-mvn clean package
-
-# Install to local repository
-mvn clean install
-```
-
-### Build Output
+This project uses Maven for building.
 The compiled plugin will be in `target/lastlog-2.0.0.jar`
 
 ### Maven Goals
+
 - `mvn compile` - Compile the source code
 - `mvn package` - Create the JAR file
 - `mvn clean` - Clean build artifacts
