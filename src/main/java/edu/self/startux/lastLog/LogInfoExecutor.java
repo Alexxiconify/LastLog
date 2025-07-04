@@ -36,7 +36,7 @@ final class LogInfoExecutor implements CommandExecutor {
         // try match exact name with any known player
         OfflinePlayer player = plugin.getServer().getOfflinePlayer(uuid);
         // if none is found, be more lenient with online players
-        if (player != null && !player.hasPlayedBefore()) {
+        if (player != null && player.getFirstPlayed() <= 0) {
             player = plugin.getServer().getPlayer(uuid);
         }
 
@@ -79,14 +79,14 @@ final class LogInfoExecutor implements CommandExecutor {
                 long first = player.getFirstPlayed();
                 // Sometimes Bukkit stubbornly reports bogus dates even though they were accurate during initialization.
                 // In those cases, fetch them from the cache.
-                if (first == 0L) {
+                if (first <= 0L) {
                     PlayerList.Entry entry = findByName(plugin.getPlayerList(false), name);
                     if (entry != null) {
                         first = entry.time;
                     }
                 }
                 long last = player.getLastPlayed();
-                if (last == 0L) {
+                if (last <= 0L) {
                     PlayerList.Entry entry = findByName(plugin.getPlayerList(true), name);
                     if (entry != null) {
                         last = entry.time;
