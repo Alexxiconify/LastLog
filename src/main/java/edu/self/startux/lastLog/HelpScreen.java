@@ -24,21 +24,20 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.Component;
 
 final class HelpScreen {
-    private LastLogPlugin plugin;
-    private String[] lines;
+    private Component helpComponent;
 
     HelpScreen(LastLogPlugin plugin) {
-        this.plugin = plugin;
         ConfigurationSection config = YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource("help.yml")));
-        lines = ChatColor.translateAlternateColorCodes('&', config.getString("helpmessage")).split("\n");
+        MiniMessage miniMessage = MiniMessage.miniMessage();
+        helpComponent = miniMessage.deserialize(config.getString("helpmessage"));
     }
 
     void send(CommandSender sender) {
         sender.sendMessage(LastLogColors.HEADER + "[LastLog] Help");
-        for (String line : lines) {
-            sender.sendMessage(line);
-        }
+        sender.sendMessage(helpComponent);
     }
 }
