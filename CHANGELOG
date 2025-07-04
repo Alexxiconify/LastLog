@@ -1,0 +1,69 @@
+2.0.0
+
+* Migrate to Paper API for improved performance and compatibility
+* Optimize player lookup using Paper's improved APIs
+* Add paper-plugin.yml for Paper-specific configuration
+* Convert to Maven build system for better IDE integration
+
+1.1.2
+
+* Add lastlog.self permission to look up yourself
+* Change /loginfo without arguments look up yourself
+
+1.1.1
+
+* Add -h/--help for help screen
+
+1.1
+
+* Some minor fixes and improvements
+* Add -a/--after and -b/--before flags
+
+1.0.1
+
+* Fix permissions bug in plugin.yml forbidding console to use the plugin
+* Change distribution to LastLog.jar only plus github repo link on dev.bukkit
+
+1.0
+
+* Highlight online players in /firstlog and /lastlog output
+
+0.7
+
+* Add Online status to loginfo
+* Attempt to fix rare bogus dates from loginfo
+
+0.6
+
+* FIX bad permission setup
+
+0.5
+
+* FIX firstlog not updating on first join
+* FIX notification not working for non-op
+
+0.4
+
+* Discard invalid dates in "/loginfo"
+* Permissions default to op
+* Commands usable from console
+* Fix duplicate notifications to console
+* Add CHANGELOG file
+
+0.3
+
+* Expand smart player search to find offline players
+* Code clean-up 
+
+0.2
+
+* Display dates in a more pleasant format
+* Fix permissions: They were ignored
+* Optimize: Cache output of time consuming, I/O heavy operations
+* Remove therefore obsolete multithreaded sorting
+* Add notification on first login feature
+* Add README file
+
+0.1
+
+* initial release
