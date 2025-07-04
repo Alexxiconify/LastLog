@@ -20,7 +20,6 @@
 package edu.self.startux.lastLog;
 
 import java.io.InputStreamReader;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -37,7 +36,7 @@ final class HelpScreen {
     }
 
     void send(CommandSender sender) {
-        sender.sendMessage(LastLogColors.HEADER + "[LastLog] Help");
+        sender.sendMessage(Component.text("[LastLog] Help", LastLogColors.HEADER));
         sender.sendMessage(helpComponent);
     }
 }
