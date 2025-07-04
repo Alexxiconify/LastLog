@@ -93,7 +93,7 @@ final class PlayerList implements Iterable<PlayerList.Entry> {
         for (OfflinePlayer player : playerList) {
             long time;
             if (lastlog) {
-                time = player.getLastPlayed();
+                time = player.getLastLogin();
             } else {
                 time = player.getFirstPlayed();
             }

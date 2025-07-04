@@ -85,7 +85,7 @@ final class LogInfoExecutor implements CommandExecutor {
                         first = entry.time;
                     }
                 }
-                long last = player.getLastPlayed();
+                long last = player.getLastLogin();
                 if (last <= 0L) {
                     PlayerList.Entry entry = findByName(plugin.getPlayerList(true), name);
                     if (entry != null) {
