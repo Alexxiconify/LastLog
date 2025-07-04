@@ -22,6 +22,7 @@ package edu.self.startux.lastLog;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import net.kyori.adventure.text.Component;
 
 public class LastLogExecutor implements CommandExecutor {
     private LastLogPlugin plugin;
@@ -46,19 +47,19 @@ public class LastLogExecutor implements CommandExecutor {
         try {
             result = parser.parse(args);
         } catch (CommandLineParser.ParseException pe) {
-            sender.sendMessage(LastLogColors.ERROR + "Error! " + pe.getMessage());
+            sender.sendMessage(Component.text("Error! " + pe.getMessage(), LastLogColors.ERROR));
             return true;
         }
         if (result.getOrphans().size() > 1) {
-            sender.sendMessage(LastLogColors.ERROR + "Too many arguments!");
+            sender.sendMessage(Component.text("Too many arguments!", LastLogColors.ERROR));
             return true;
         }
         if (result.countFlag(parser.getFlag('a')) > 1) {
-            sender.sendMessage(LastLogColors.ERROR + "Option '-a' used more than once!");
+            sender.sendMessage(Component.text("Option '-a' used more than once!", LastLogColors.ERROR));
             return true;
         }
         if (result.countFlag(parser.getFlag('b')) > 1) {
-            sender.sendMessage(LastLogColors.ERROR + "Option '-b' used more than once!");
+            sender.sendMessage(Component.text("Option '-b' used more than once!", LastLogColors.ERROR));
             return true;
         }
         if (result.countFlag(parser.getFlag('h')) > 0) {
@@ -70,7 +71,7 @@ public class LastLogExecutor implements CommandExecutor {
             try {
                 options.pageNumber = Integer.parseInt(result.getOrphans().get(0)) - 1;
             } catch (NumberFormatException nfe) {
-                sender.sendMessage(LastLogColors.ERROR + "Not a number: \"" + result.getOrphans().get(0) + "\"");
+                sender.sendMessage(Component.text("Not a number: \"" + result.getOrphans().get(0) + "\"", LastLogColors.ERROR));
                 return true;
             }
         }
@@ -80,7 +81,7 @@ public class LastLogExecutor implements CommandExecutor {
             try {
                 options.after = LastLogDate.parseArg(arg);
             } catch (NumberFormatException nfe) {
-                sender.sendMessage(LastLogColors.ERROR + "Invalid format: " + arg);
+                sender.sendMessage(Component.text("Invalid format: " + arg, LastLogColors.ERROR));
                 return true;
             }
         }
@@ -89,7 +90,7 @@ public class LastLogExecutor implements CommandExecutor {
             try {
                 options.before = LastLogDate.parseArg(arg);
             } catch (NumberFormatException nfe) {
-                sender.sendMessage(LastLogColors.ERROR + "Invalid format: " + arg);
+                sender.sendMessage(Component.text("Invalid format: " + arg, LastLogColors.ERROR));
                 return true;
             }
         }
