@@ -21,6 +21,7 @@ package edu.self.startux.lastLog;
 
 import java.util.UUID;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,9 +40,11 @@ public final class LastLogPlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        getCommand("firstlog").setExecutor(firstLogExecutor);
-        getCommand("lastlog").setExecutor(lastLogExecutor);
-        getCommand("loginfo").setExecutor(logInfoExecutor);
+        // Register commands programmatically for Paper compatibility
+        registerCommand("firstlog", firstLogExecutor, "lastlog.firstlog", "Show listing of the last players who logged in for the first time", "Usage: /firstlog [options] [pagenumber]");
+        registerCommand("lastlog", lastLogExecutor, "lastlog.lastlog", "Show listing of the last logged in players", "Usage: /lastlog [options] [pagenumber]");
+        registerCommand("loginfo", logInfoExecutor, "lastlog.loginfo", "Show first and last login date of a user", "Usage: /loginfo <playername>");
+        
         getServer().getPluginManager().registerEvents(this, this);
         // Apparently what takes the most time are the following I/O heavy instructions.
         // Hence, their output will be cached. Initialize the cache with bukkit data.
@@ -56,6 +59,22 @@ public final class LastLogPlugin extends JavaPlugin implements Listener {
         firstlogList = null;
         lastlogList = null;
         helpScreen = null;
+    }
+
+    /**
+     * Register a command programmatically for Paper compatibility
+     */
+    private void registerCommand(String name, org.bukkit.command.CommandExecutor executor, String permission, String description, String usage) {
+        Command command = new Command(name) {
+            @Override
+            public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+                return executor.onCommand(sender, this, commandLabel, args);
+            }
+        };
+        command.setPermission(permission);
+        command.setDescription(description);
+        command.setUsage(usage);
+        getServer().getCommandMap().register(name, command);
     }
 
     /**
