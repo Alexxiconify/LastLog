@@ -77,7 +77,6 @@ final class LogInfoExecutor implements CommandExecutor {
                     .append(Component.text(" is unknown", LastLogColors.RESET))
                     .build());
             } else {
-                UUID uuid = player.getUniqueId();
                 String name = player.getName();
                 long first = player.getFirstPlayed();
                 // Sometimes Bukkit stubbornly reports bogus dates even though they were accurate during initialization.
