@@ -19,18 +19,18 @@
 
 package edu.self.startux.lastLog;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 final class LastLogColors {
     private LastLogColors() { }
 
-    public static final String PLAYER_NAME = "" + ChatColor.GOLD;
-    public static final String HEADER = "" + ChatColor.AQUA;
-    public static final String MINOR = "" + ChatColor.DARK_AQUA;
-    public static final String DATE = "" + ChatColor.YELLOW;
-    public static final String UNKNOWN = "" + ChatColor.GRAY;
-    public static final String ERROR = "" + ChatColor.RED;
-    public static final String RESET = "" + ChatColor.WHITE;
-    public static final String ONLINE = "" + ChatColor.GREEN;
-    public static final String OFFLINE = "" + ChatColor.RED;
+    public static final NamedTextColor PLAYER_NAME = NamedTextColor.GOLD;
+    public static final NamedTextColor HEADER = NamedTextColor.AQUA;
+    public static final NamedTextColor MINOR = NamedTextColor.DARK_AQUA;
+    public static final NamedTextColor DATE = NamedTextColor.YELLOW;
+    public static final NamedTextColor UNKNOWN = NamedTextColor.GRAY;
+    public static final NamedTextColor ERROR = NamedTextColor.RED;
+    public static final NamedTextColor RESET = NamedTextColor.WHITE;
+    public static final NamedTextColor ONLINE = NamedTextColor.GREEN;
+    public static final NamedTextColor OFFLINE = NamedTextColor.RED;
 }
